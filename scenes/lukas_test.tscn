@@ -6,13 +6,30 @@
 [node name="LukasTest" type="Node2D"]
 
 [node name="PackingGrid" parent="." instance=ExtResource("1_xmwxt")]
+position = Vector2(-150, 0)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+[node name="PackingGrid2" parent="." instance=ExtResource("1_xmwxt")]
+position = Vector2(-50, 0)
+color = 1
 
-[node name="Gift" parent="." instance=ExtResource("2_al36n")]
-position = Vector2(-50, -50)
+[node name="PackingGrid3" parent="." instance=ExtResource("1_xmwxt")]
+position = Vector2(50, 0)
 color = 2
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Gift" parent="." instance=ExtResource("2_al36n")]
+position = Vector2(-100, -150)
+gift_size = Vector2i(2, 2)
+scale_size = 3
+
 [node name="Gift2" parent="." instance=ExtResource("2_al36n")]
-position = Vector2(-100, -100)
+position = Vector2(0, -100)
+gift_size = Vector2i(2, 2)
+color = 1
+
+[node name="Gift3" parent="." instance=ExtResource("2_al36n")]
+position = Vector2(100, -100)
+gift_size = Vector2i(2, 2)
+color = 2
