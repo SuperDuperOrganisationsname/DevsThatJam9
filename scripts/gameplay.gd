@@ -114,10 +114,6 @@ func _process(delta: float) -> void:
 		$Packages/Package3.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _send_package_off(i: int):
-	for child in $Gifts.get_children():
-		if child.color == i and child.is_dropped:
-			child.queue_free()
-	
 	var score: int = 0
 	if i == 0:
 		$ShippingBox1.play("ClosePackage")
@@ -125,18 +121,21 @@ func _send_package_off(i: int):
 		
 		var cd = (1.0 - (score as float / 64.0)) * base_cd
 		$Timer/Button1CD.start(cd)
+		$Timer/DeleteGiftsTimer1.start(1.5)
 	elif i == 1:
 		$ShippingBox2.play("ClosePackage")
 		score += $Packages/Package2/PackingGrid.reset_grid()
 		
 		var cd = (1.0 - (score as float / 64.0)) * base_cd
 		$Timer/Button2CD.start(cd)
+		$Timer/DeleteGiftsTimer2.start(1.5)
 	elif i == 2:
 		$ShippingBox3.play("ClosePackage")
 		score += $Packages/Package3/PackingGrid.reset_grid()
 		
 		var cd = (1.0 - (score as float / 64.0)) * base_cd
 		$Timer/Button3CD.start(cd)
+		$Timer/DeleteGiftsTimer3.start(1.5)
 	
 	total_score += score
 
@@ -172,3 +171,48 @@ func _on_button_3cd_timeout() -> void:
 	$Control/Color3Sendoff.text = Button_Text
 	$Control/Color3Sendoff.disabled = false
 	$Packages/Package3.process_mode = Node.PROCESS_MODE_INHERIT
+
+var to_delete_colors: Array[int] = []
+
+func _on_delete_gifts_timer_1_timeout() -> void:
+	$Packages/Package1.visible = false
+	for child in $Gifts.get_children():
+		if child.color == 0 and child.is_dropped:
+			child.queue_free()
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property($ShippingBox1, "position", Vector2(-192, 500), 0.5).set_ease(Tween.EASE_OUT)
+	tween.chain().tween_property($ShippingBox1, "position", Vector2(-192, 84), 0.5).set_ease(Tween.EASE_OUT)
+	
+	await tween.finished
+	$Packages/Package1.visible = true
+	$ShippingBox1.play("ClosePackage", -1.0)
+
+func _on_delete_gifts_timer_2_timeout() -> void:
+	$Packages/Package2.visible = false
+	for child in $Gifts.get_children():
+		if child.color == 1 and child.is_dropped:
+			child.queue_free()
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property($ShippingBox2, "position", Vector2(0, 500), 0.5).set_ease(Tween.EASE_OUT)
+	tween.chain().tween_property($ShippingBox2, "position", Vector2(0, 84), 0.5).set_ease(Tween.EASE_OUT)
+	
+	await tween.finished
+	$Packages/Package2.visible = true
+	$ShippingBox2.play("ClosePackage", -1.0)
+
+
+func _on_delete_gifts_timer_3_timeout() -> void:
+	$Packages/Package3.visible = false
+	for child in $Gifts.get_children():
+		if child.color == 2 and child.is_dropped:
+			child.queue_free()
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property($ShippingBox3, "position", Vector2(192, 500), 0.5).set_ease(Tween.EASE_OUT)
+	tween.chain().tween_property($ShippingBox3, "position", Vector2(192, 84), 0.5).set_ease(Tween.EASE_OUT)
+	
+	await tween.finished
+	$Packages/Package3.visible = true
+	$ShippingBox3.play("ClosePackage", -1.0)

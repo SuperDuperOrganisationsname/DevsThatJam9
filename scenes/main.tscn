@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://d4ep52oxx3stn"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_2ur0b"]
-[ext_resource type="PackedScene" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
+[ext_resource type="PackedScene" uid="uid://csyvvlqifwl87" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
 [ext_resource type="PackedScene" uid="uid://dadtonw6mrlp8" path="res://scenes/present_sfx_player.tscn" id="2_vh1fj"]
 [ext_resource type="Theme" uid="uid://8khgiwggp4ed" path="res://assets/basic_theme.tres" id="3_5xp6s"]
-[ext_resource type="PackedScene" uid="uid://l2cn8p0ahxlw" path="res://scenes/shipping_box.tscn" id="5_cikjy"]
+[ext_resource type="PackedScene" uid="uid://cwphbbl83kjlq" path="res://scenes/shipping_box.tscn" id="5_cikjy"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ur0b")
@@ -32,23 +32,38 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[node name="DeleteGiftsTimer1" type="Timer" parent="Timer"]
+wait_time = 2.0
+one_shot = true
+
+[node name="DeleteGiftsTimer2" type="Timer" parent="Timer"]
+wait_time = 2.0
+one_shot = true
+
+[node name="DeleteGiftsTimer3" type="Timer" parent="Timer"]
+wait_time = 2.0
+one_shot = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
 
 [node name="Packages" type="Node2D" parent="."]
 
 [node name="Package1" type="Node2D" parent="Packages"]
+z_index = -2
 position = Vector2(-240, 36)
 
 [node name="PackingGrid" parent="Packages/Package1" instance=ExtResource("1_bkw12")]
 
 [node name="Package2" type="Node2D" parent="Packages"]
+z_index = -2
 position = Vector2(-48, 36)
 
 [node name="PackingGrid" parent="Packages/Package2" instance=ExtResource("1_bkw12")]
 color = 1
 
 [node name="Package3" type="Node2D" parent="Packages"]
+z_index = -2
 position = Vector2(144, 36)
 
 [node name="PackingGrid" parent="Packages/Package3" instance=ExtResource("1_bkw12")]
@@ -56,7 +71,6 @@ color = 2
 
 [node name="ShippingBox1" parent="." instance=ExtResource("5_cikjy")]
 position = Vector2(-192, 84)
-animation = &"ClosePackage"
 frame = 2
 frame_progress = 0.25845
 
@@ -120,6 +134,9 @@ horizontal_alignment = 2
 [connection signal="timeout" from="Timer/Button1CD" to="." method="_on_button_1cd_timeout"]
 [connection signal="timeout" from="Timer/Button2CD" to="." method="_on_button_2cd_timeout"]
 [connection signal="timeout" from="Timer/Button3CD" to="." method="_on_button_3cd_timeout"]
+[connection signal="timeout" from="Timer/DeleteGiftsTimer1" to="." method="_on_delete_gifts_timer_1_timeout"]
+[connection signal="timeout" from="Timer/DeleteGiftsTimer2" to="." method="_on_delete_gifts_timer_2_timeout"]
+[connection signal="timeout" from="Timer/DeleteGiftsTimer3" to="." method="_on_delete_gifts_timer_3_timeout"]
 [connection signal="button_down" from="Control/Color1Sendoff" to="." method="_on_color_1_sendoff_button_down"]
 [connection signal="button_down" from="Control/Color2Sendoff" to="." method="_on_color_2_sendoff_button_down"]
 [connection signal="button_down" from="Control/Color3Sendoff" to="." method="_on_color_3_sendoff_button_down"]

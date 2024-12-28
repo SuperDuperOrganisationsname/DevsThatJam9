@@ -36,6 +36,7 @@ func _init_gift() -> void:
 	add_child(sprite)
 	
 	scale = Vector2(1, 1)
+	z_index = 0
 	var shape = RectangleShape2D.new()
 	shape.size = (gift_size * Globals.TILE_SIZE) as Vector2
 	$Area2D/CollisionShape2D.shape = shape
@@ -72,6 +73,7 @@ func _drag():
 			_on_place_gift()
 			is_dropped = true
 			scale = Vector2(scale_size, scale_size)
+			z_index = -1
 			
 			Globals.gameplay_node.remove_gift(gift_index)
 			$Area2D.process_mode = Node.PROCESS_MODE_DISABLED
