@@ -20,6 +20,8 @@ var is_dropped: bool = false
 
 var gift_index: int = 0
 
+signal place_gift
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_init_gift()
@@ -78,13 +80,13 @@ func _drag():
 		Globals.current_grid = null
 
 func _on_select_gift():
-	pass
+	place_gift.emit()
 	
 func _on_drag_gift():
 	pass
 
 func _on_place_gift():
-	pass
+	place_gift.emit()
 	
 func _on_reject_gift():
 	pass

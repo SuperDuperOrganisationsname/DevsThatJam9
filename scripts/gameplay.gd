@@ -37,6 +37,7 @@ func _draw_gift() -> Gift:
 
 func _spawn_gift(gift: Gift, pos: Vector2) -> Node2D:
 	var obj = load("res://scenes/gift.tscn").instantiate()
+	obj.connect("place_gift", Globals.sfx_player.play_gift_interaction_sound)
 	obj.texture = gift.texture
 	obj.scale_size = gift.scale
 	obj.gift_size = gift.size
@@ -108,17 +109,17 @@ func _send_package_off(i: int):
 	if i == 0:
 		score += $Packages/Package1/PackingGrid.reset_grid()
 		
-		var cd = (1.0 - (score as float/ 64.0)) * base_cd
+		var cd = (1.0 - (score as float / 64.0)) * base_cd
 		$Timer/Button1CD.start(cd)
 	elif i == 1:
 		score += $Packages/Package2/PackingGrid.reset_grid()
 		
-		var cd = (1.0 - (score as float/ 64.0)) * base_cd
+		var cd = (1.0 - (score as float / 64.0)) * base_cd
 		$Timer/Button2CD.start(cd)
 	elif i == 2:
 		score += $Packages/Package3/PackingGrid.reset_grid()
 		
-		var cd = (1.0 - (score as float/ 64.0)) * base_cd
+		var cd = (1.0 - (score as float / 64.0)) * base_cd
 		$Timer/Button3CD.start(cd)
 	
 	total_score += score
