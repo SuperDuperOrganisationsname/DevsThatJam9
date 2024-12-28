@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://7oty6cf2yyap"
-path="res://.godot/imported/MouldyCheeseRegular-WyMWG.ttf-ed2b566d08fe9c0ad4b230b2da95723e.fontdata"
+uid="uid://vbxs5xbrucdk"
+path="res://.godot/imported/MinecraftItalic-R8Mo.otf-c004a76600f4bb6cd995d90aff2e9aa0.fontdata"
 
 [deps]
 
-source_file="res://assets/MouldyCheeseRegular-WyMWG.ttf"
-dest_files=["res://.godot/imported/MouldyCheeseRegular-WyMWG.ttf-ed2b566d08fe9c0ad4b230b2da95723e.fontdata"]
+source_file="res://assets/fonts/MinecraftItalic-R8Mo.otf"
+dest_files=["res://.godot/imported/MinecraftItalic-R8Mo.otf-c004a76600f4bb6cd995d90aff2e9aa0.fontdata"]
 
 [params]
 
