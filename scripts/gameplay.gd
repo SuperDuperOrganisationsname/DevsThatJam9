@@ -16,6 +16,8 @@ class Gift:
 	var scale: int
 	var texture: Texture2D
 
+var pending_gifts: Array[Node2D] = []
+
 func _draw_gift() -> Gift:
 	var gift = Gift.new()
 	gift.color = Options_Color[randi() % Options_Color.size()]
@@ -27,7 +29,7 @@ func _draw_gift() -> Gift:
 	
 	return gift
 
-func _spawn_gift(gift: Gift, pos: Vector2):
+func _spawn_gift(gift: Gift, pos: Vector2) -> Node2D:
 	var obj = load("res://scenes/gift.tscn").instantiate()
 	obj.texture = gift.texture
 	obj.scale_size = gift.scale
@@ -38,11 +40,28 @@ func _spawn_gift(gift: Gift, pos: Vector2):
 	$Gifts.add_child(obj)
 	obj._init_gift()
 	
+	return obj
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_spawn_gift(_draw_gift(), Vector2(-100, -100))
+	Globals.gameplay_node = self
+	
+	for i in range(15):
+		pending_gifts.append(_spawn_gift(_draw_gift(), Vector2(_int_to_x_pos(i), -100)))
+	_update_positions()
 
+func _int_to_x_pos(i: int) -> int:
+	return -246 + 36 * (14 - i)
 
+func _update_positions():
+	for j in range(pending_gifts.size()):
+		var tween = get_tree().create_tween()
+		tween.tween_property(pending_gifts[j], "position", Vector2(_int_to_x_pos(j), -100), 0.2).set_ease(Tween.EASE_OUT)
+		pending_gifts[j].gift_index = j
+
+func remove_gift(index: int):
+	pending_gifts.remove_at(index)
+	_update_positions()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

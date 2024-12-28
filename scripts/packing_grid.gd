@@ -14,6 +14,7 @@ var gift_inside: bool = false
 var gift_position: Vector2i = Vector2i(0, 0)
 var gift_global_position: Vector2 = Vector2(0, 0)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var shape = RectangleShape2D.new()

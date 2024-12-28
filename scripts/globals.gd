@@ -12,3 +12,5 @@ var is_dragging: bool = false
 
 var current_gift: Node2D
 var current_grid: Node2D
+
+var gameplay_node: Node2D

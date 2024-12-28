@@ -18,6 +18,7 @@ var draggable: bool = false
 var can_be_dropped: bool = false
 var is_dropped: bool = false
 
+var gift_index: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,7 +41,7 @@ func _init_gift() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if draggable:
+	if draggable and not is_dropped:
 		_drag()
 
 func _drag():
@@ -67,10 +68,14 @@ func _drag():
 			_on_place_gift()
 			is_dropped = true
 			scale = Vector2(scale_size, scale_size)
+			
+			Globals.gameplay_node.remove_gift(gift_index)
 			$Area2D.process_mode = Node.PROCESS_MODE_DISABLED
 		else:
 			tween.tween_property(self, "global_position", initial_position, 0.2).set_ease(Tween.EASE_OUT)
+			scale = Vector2(1, 1)
 			_on_reject_gift()
+			draggable = false
 		Globals.current_gift = null
 		Globals.current_grid = null
 
@@ -87,14 +92,14 @@ func _on_reject_gift():
 	pass
 
 func _on_area_2d_mouse_entered() -> void:
-	if not Globals.is_dragging:
+	if not Globals.is_dragging and Globals.current_gift == null:
 		draggable = true
 		scale = Vector2(scale_size + 0.05, scale_size + 0.05)
 		Globals.current_gift = self
 
 
 func _on_area_2d_mouse_exited() -> void:
-	if not Globals.is_dragging:
+	if not Globals.is_dragging and Globals.current_gift == self:
 		draggable = false
 		if is_dropped:
 			scale = Vector2(scale_size, scale_size)
