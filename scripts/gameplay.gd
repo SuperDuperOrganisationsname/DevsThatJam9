@@ -151,6 +151,8 @@ func _on_color_3_sendoff_button_down() -> void:
 
 func _on_new_gift_timer_timeout() -> void:
 	add_gift()
+	var time = 5.0 - 4.0 * ((total_score as float) / (total_score as float + 100.0))
+	$Timer/NewGiftTimer.start(time)
 
 
 const Button_Text = "Package & Send"
