@@ -49,7 +49,8 @@ text = "Color Palette used:
 Music used:
 Morning Routine by [url=https://soundcloud.com/ghostrifter-official]Ghostrifter Official[/url]
 Music promoted by [url]https://www.chosic.com/free-music/all/[/url]
-[url=https://creativecommons.org/licenses/by-sa/3.0/]Creative Commons CC BY-SA 3.0[/url]"
+[url=https://creativecommons.org/licenses/by-sa/3.0/]Creative Commons CC BY-SA 3.0[/url]
+Parts of the beginning and end were cut to loop the song better"
 script = ExtResource("2_amum0")
 
 [node name="MenuButton" parent="MarginContainer/VSplitContainer" instance=ExtResource("1_wk540")]
