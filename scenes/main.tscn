@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4ep52oxx3stn"]
+[gd_scene load_steps=7 format=3 uid="uid://d4ep52oxx3stn"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_2ur0b"]
 [ext_resource type="PackedScene" uid="uid://csyvvlqifwl87" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
@@ -6,7 +6,6 @@
 [ext_resource type="Theme" uid="uid://8khgiwggp4ed" path="res://assets/basic_theme.tres" id="3_5xp6s"]
 [ext_resource type="PackedScene" uid="uid://cwphbbl83kjlq" path="res://scenes/shipping_box.tscn" id="5_cikjy"]
 [ext_resource type="PackedScene" uid="uid://cmifk04jd7edn" path="res://scenes/menus/pause_menu.tscn" id="6_nhbk8"]
-[ext_resource type="Script" path="res://scripts/buttons/pause_button.gd" id="6_s7ehv"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ur0b")
@@ -139,7 +138,6 @@ offset_right = -323.0
 offset_bottom = -185.0
 theme = ExtResource("3_5xp6s")
 text = "Pause"
-script = ExtResource("6_s7ehv")
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_nhbk8")]
 visible = false
