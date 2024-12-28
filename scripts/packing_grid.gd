@@ -59,8 +59,7 @@ func place_rect(rect: Rect2i):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if gift_inside and Globals.current_gift:
-		var pos = (Globals.current_gift.global_position - global_position) as Vector2i + Vector2i(2, 2)
+		var pos = (Globals.current_gift.global_position - global_position) as Vector2i + Vector2i(2, 2) - (Globals.current_gift.scaled_half_size as Vector2i)
 		gift_position = pos / Globals.TILE_SIZE
-		gift_global_position = (global_position as Vector2i + gift_position * Globals.TILE_SIZE) as Vector2
-
+		gift_global_position = (global_position as Vector2i + gift_position * Globals.TILE_SIZE) as Vector2 + Globals.current_gift.scaled_half_size
 		Globals.current_gift.can_be_dropped = is_rect_placeable(Rect2i(gift_position, Globals.current_gift.size))

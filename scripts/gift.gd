@@ -6,6 +6,7 @@ extends Node2D
 @export var color: int
 
 @onready var size: Vector2i = gift_size * scale_size
+@onready var scaled_half_size: Vector2 = (size * Globals.TILE_SIZE) as Vector2 / 2
 
 var sprite: Sprite2D
 
@@ -25,7 +26,6 @@ func _ready() -> void:
 func _init_gift() -> void:
 	sprite = Sprite2D.new()
 	sprite.texture = texture
-	sprite.centered = false
 	sprite.hframes = 3
 	sprite.frame = color
 	
@@ -37,8 +37,6 @@ func _init_gift() -> void:
 			var shape = RectangleShape2D.new()
 			shape.size = (gift_size * Globals.TILE_SIZE) as Vector2
 			c.shape = shape
-	
-	$Area2D.position = (gift_size * Globals.TILE_SIZE) as Vector2 / 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -116,5 +114,6 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if color != body.color:
 		return
 	can_be_dropped = false
-	Globals.current_grid.gift_inside = false
-	Globals.current_grid = null
+	if Globals.current_grid:
+		Globals.current_grid.gift_inside = false
+		Globals.current_grid = null
