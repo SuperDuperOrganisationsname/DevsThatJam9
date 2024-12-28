@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://csyvvlqifwl87"]
+[gd_scene load_steps=5 format=3 uid="uid://csyvvlqifwl87"]
 
 [ext_resource type="Script" path="res://scripts/packing_grid.gd" id="1_gb66s"]
 [ext_resource type="Texture2D" uid="uid://cf7nsui38g6xm" path="res://assets/art/TileEmpty.png" id="2_wtd1o"]
+[ext_resource type="Texture2D" uid="uid://doutct85mjk5m" path="res://assets/art/TileFull.png" id="3_abfcj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_na602"]
 
 [node name="PackingGrid" type="StaticBody2D"]
 script = ExtResource("1_gb66s")
 texture = ExtResource("2_wtd1o")
+placement_possible_texture = ExtResource("3_abfcj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_na602")

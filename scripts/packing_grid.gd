@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var texture: Texture2D
+@export var placement_possible_texture: Texture2D
 @export var color: int
 
 var grid_states: Array[bool] = []
@@ -41,12 +42,23 @@ func reset_grid() -> int:
 	placed_tiles = 0
 	return temp
 
+func redraw_grid():
+	for i in range(grid_size.x * grid_size.y):
+		textures[i].texture = texture
+
+func draw_placement_grid(rect: Rect2i):
+	for x in range(rect.position.x, rect.end.x):
+		for y in range(rect.position.y, rect.end.y):
+			textures[y + x * grid_size.x].texture = placement_possible_texture
+
 func is_rect_placeable(rect: Rect2i) -> bool:
 	for x in range(rect.position.x, rect.end.x):
 		for y in range(rect.position.y, rect.end.y):
 			if x < 0 or y < 0 or x >= grid_size.x or y >= grid_size.y or grid_states[y + x * grid_size.x]:
+				redraw_grid()
 				return false
-	
+	redraw_grid()
+	draw_placement_grid(rect)
 	return true
 
 func place_rect(rect: Rect2i):
@@ -57,6 +69,7 @@ func place_rect(rect: Rect2i):
 		for y in range(rect.position.y, rect.end.y):
 			grid_states[y + x * grid_size.x] = true
 			placed_tiles += 1
+	redraw_grid()
 
 
 
