@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5lw3g0f3t02w"]
+[gd_scene load_steps=4 format=3 uid="uid://c5lw3g0f3t02w"]
 
 [ext_resource type="PackedScene" uid="uid://b6mewhejl0yka" path="res://scenes/menus/menu_button.tscn" id="1_wk540"]
+[ext_resource type="Script" path="res://scripts/buttons/rich_text_label.gd" id="2_amum0"]
 [ext_resource type="Theme" uid="uid://8khgiwggp4ed" path="res://assets/basic_theme.tres" id="2_nswpx"]
 
 [node name="CreditsMenu" type="Control"]
@@ -41,13 +42,15 @@ split_offset = 7250
 layout_mode = 2
 theme = ExtResource("2_nswpx")
 theme_override_font_sizes/normal_font_size = 30
-text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+bbcode_enabled = true
+text = "Color Palette used:
+[url=https://lospec.com/palette-list/pastel-retro-handheld]Pastel Retro Handheld[/url]
 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
-
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
-
-Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer"
+Music used:
+Morning Routine by [url=https://soundcloud.com/ghostrifter-official]Ghostrifter Official[/url]
+Music promoted by [url]https://www.chosic.com/free-music/all/[/url]
+[url=https://creativecommons.org/licenses/by-sa/3.0/]Creative Commons CC BY-SA 3.0[/url]"
+script = ExtResource("2_amum0")
 
 [node name="MenuButton" parent="MarginContainer/VSplitContainer" instance=ExtResource("1_wk540")]
 layout_mode = 2
@@ -56,3 +59,5 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 40
 text = "Main Menu"
 scene_to_transition = 1
+
+[connection signal="meta_clicked" from="MarginContainer/VSplitContainer/RichTextLabel" to="MarginContainer/VSplitContainer/RichTextLabel" method="_on_meta_clicked"]
