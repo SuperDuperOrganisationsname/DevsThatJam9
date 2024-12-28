@@ -1,7 +1,6 @@
 extends Node2D
 
-@export var empty_state: Texture2D
-@export var full_state: Texture2D
+@export var texture: Texture2D
 @export var color: int
 
 var grid_states: Array[bool] = []
@@ -26,7 +25,7 @@ func _ready() -> void:
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			var sprite = Sprite2D.new()
-			sprite.texture = empty_state
+			sprite.texture = texture
 			sprite.centered = false
 			sprite.offset = Vector2(x, y) * (Globals.TILE_SIZE as Vector2)
 			add_child(sprite)
@@ -54,15 +53,8 @@ func place_rect(rect: Rect2i):
 		for y in range(rect.position.y, rect.end.y):
 			grid_states[y + x * grid_size.x] = true
 			placed_tiles += 1
-	
-	_update_textures()
 
-func _update_textures():
-	for i in range(grid_size.x * grid_size.y):
-		if grid_states[i]:
-			textures[i].texture = full_state
-		else:
-			textures[i].texture = empty_state
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

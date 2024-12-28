@@ -1,3 +1,31 @@
-[gd_scene format=3 uid="uid://d4ep52oxx3stn"]
+[gd_scene load_steps=3 format=3 uid="uid://d4ep52oxx3stn"]
+
+[ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_2ur0b"]
+[ext_resource type="PackedScene" uid="uid://csyvvlqifwl87" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_2ur0b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="Packages" type="Node2D" parent="."]
+
+[node name="Package1" type="Node2D" parent="Packages"]
+position = Vector2(-240, 36)
+
+[node name="PackingGrid" parent="Packages/Package1" instance=ExtResource("1_bkw12")]
+
+[node name="Package2" type="Node2D" parent="Packages"]
+position = Vector2(-48, 36)
+
+[node name="PackingGrid" parent="Packages/Package2" instance=ExtResource("1_bkw12")]
+color = 1
+
+[node name="Package3" type="Node2D" parent="Packages"]
+position = Vector2(144, 36)
+
+[node name="PackingGrid" parent="Packages/Package3" instance=ExtResource("1_bkw12")]
+color = 2
+
+[node name="Gifts" type="Node2D" parent="."]

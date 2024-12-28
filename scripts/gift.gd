@@ -15,9 +15,14 @@ var offset: Vector2
 var draggable: bool = false
 
 var can_be_dropped: bool = false
+var is_dropped: bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_init_gift()
+
+func _init_gift() -> void:
 	sprite = Sprite2D.new()
 	sprite.texture = texture
 	sprite.centered = false
@@ -26,14 +31,14 @@ func _ready() -> void:
 	
 	add_child(sprite)
 	
-	scale = Vector2(scale_size, scale_size)
+	scale = Vector2(1, 1)
 	for c in $Area2D.get_children():
 		if c is CollisionShape2D:
 			var shape = RectangleShape2D.new()
 			shape.size = (gift_size * Globals.TILE_SIZE) as Vector2
 			c.shape = shape
 	
-	$Area2D.position += (gift_size * Globals.TILE_SIZE) as Vector2 / 2
+	$Area2D.position = (gift_size * Globals.TILE_SIZE) as Vector2 / 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -62,6 +67,8 @@ func _drag():
 			Globals.current_grid.place_rect(Rect2i(Globals.current_grid.gift_position, size))
 			
 			_on_place_gift()
+			is_dropped = true
+			scale = Vector2(scale_size, scale_size)
 			$Area2D.process_mode = Node.PROCESS_MODE_DISABLED
 		else:
 			tween.tween_property(self, "global_position", initial_position, 0.2).set_ease(Tween.EASE_OUT)
@@ -91,7 +98,10 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	if not Globals.is_dragging:
 		draggable = false
-		scale = Vector2(scale_size, scale_size)
+		if is_dropped:
+			scale = Vector2(scale_size, scale_size)
+		else:
+			scale = Vector2(1, 1)
 		Globals.current_gift = null
 
 
