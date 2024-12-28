@@ -1,0 +1,163 @@
+[gd_scene load_steps=23 format=3 uid="uid://l2cn8p0ahxlw"]
+
+[ext_resource type="Texture2D" uid="uid://cvsmc113tw1qf" path="res://assets/art/ShippingBoxSpriteSheet.png" id="1_yc8gb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjbpm"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(0, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pkl1"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(188, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0kis"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(376, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxnxa"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(564, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rh6g"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(752, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od65g"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(940, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwykf"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(1128, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x34wg"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(1316, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0a7a"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(1504, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vhye"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(1692, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_475kk"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(1880, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jjiw"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(2068, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4knq"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(2256, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tudsy"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(2444, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxkw6"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(2632, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6d5d"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(2820, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j556y"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(3008, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17wtx"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(3196, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytpau"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(3384, 0, 188, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fhfr"]
+atlas = ExtResource("1_yc8gb")
+region = Rect2(0, 0, 188, 188)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1php2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjbpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pkl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0kis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxnxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rh6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od65g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwykf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x34wg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0a7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vhye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_475kk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jjiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4knq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tudsy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxkw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6d5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j556y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17wtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytpau")
+}],
+"loop": false,
+"name": &"ClosePackage",
+"speed": 26.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fhfr")
+}],
+"loop": true,
+"name": &"PackageStillOpen",
+"speed": 5.0
+}]
+
+[node name="ShippingBox" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_1php2")
+animation = &"ClosePackage"
+autoplay = "PackageStillOpen"
+frame = 18
+frame_progress = 1.0

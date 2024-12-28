@@ -120,16 +120,19 @@ func _send_package_off(i: int):
 	
 	var score: int = 0
 	if i == 0:
+		$ShippingBox1.play("ClosePackage")
 		score += $Packages/Package1/PackingGrid.reset_grid()
 		
 		var cd = (1.0 - (score as float / 64.0)) * base_cd
 		$Timer/Button1CD.start(cd)
 	elif i == 1:
+		$ShippingBox2.play("ClosePackage")
 		score += $Packages/Package2/PackingGrid.reset_grid()
 		
 		var cd = (1.0 - (score as float / 64.0)) * base_cd
 		$Timer/Button2CD.start(cd)
 	elif i == 2:
+		$ShippingBox3.play("ClosePackage")
 		score += $Packages/Package3/PackingGrid.reset_grid()
 		
 		var cd = (1.0 - (score as float / 64.0)) * base_cd
