@@ -3,6 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://dl02uss626a1r" path="res://assets/bgm.mp3" id="1_d225g"]
 
 [node name="Music" type="AudioStreamPlayer"]
+process_mode = 3
 stream = ExtResource("1_d225g")
 autoplay = true
 bus = &"BGM"

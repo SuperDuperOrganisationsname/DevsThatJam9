@@ -24,4 +24,5 @@ func _ready() -> void:
 			scene_path = Globals.MAIN_GAME_SCENE
 
 func _pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file(scene_path)
