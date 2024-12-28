@@ -21,6 +21,7 @@ var is_dropped: bool = false
 var gift_index: int = 0
 
 signal place_gift
+signal reject_gift
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -89,7 +90,7 @@ func _on_place_gift():
 	place_gift.emit()
 	
 func _on_reject_gift():
-	pass
+	reject_gift.emit()
 
 func _on_area_2d_mouse_entered() -> void:
 	if not Globals.is_dragging and Globals.current_gift == null:

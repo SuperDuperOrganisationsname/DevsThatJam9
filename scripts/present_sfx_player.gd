@@ -13,3 +13,7 @@ func _process(delta: float) -> void:
 func play_gift_interaction_sound():
 	var animation = "rustle_" + str(randi_range(1, 7))
 	self.play(animation)
+
+func play_gift_rejection_sound():
+	var animation = "reject"
+	self.play(animation)

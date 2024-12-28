@@ -38,6 +38,7 @@ func _draw_gift() -> Gift:
 func _spawn_gift(gift: Gift, pos: Vector2) -> Node2D:
 	var obj = load("res://scenes/gift.tscn").instantiate()
 	obj.connect("place_gift", Globals.sfx_player.play_gift_interaction_sound)
+	obj.connect("reject_gift", Globals.sfx_player.play_gift_rejection_sound)
 	obj.texture = gift.texture
 	obj.scale_size = gift.scale
 	obj.gift_size = gift.size
