@@ -1,10 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4ep52oxx3stn"]
+[gd_scene load_steps=4 format=3 uid="uid://d4ep52oxx3stn"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_2ur0b"]
 [ext_resource type="PackedScene" uid="uid://csyvvlqifwl87" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
+[ext_resource type="Theme" uid="uid://b7hoe7pa0vthm" path="res://assets/basic_theme.tres" id="3_5xp6s"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ur0b")
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="NewGiftTimer" type="Timer" parent="Timer"]
+wait_time = 5.0
+autostart = true
+
+[node name="Button1CD" type="Timer" parent="Timer"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Button2CD" type="Timer" parent="Timer"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Button3CD" type="Timer" parent="Timer"]
+wait_time = 3.0
+one_shot = true
+autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -29,3 +51,57 @@ position = Vector2(144, 36)
 color = 2
 
 [node name="Gifts" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Color1Sendoff" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -227.0
+offset_top = 145.0
+offset_right = -91.0
+offset_bottom = 170.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_5xp6s")
+text = "Package & Send"
+
+[node name="Color2Sendoff" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -35.0
+offset_top = 145.0
+offset_right = 101.0
+offset_bottom = 170.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_5xp6s")
+text = "Package & Send"
+
+[node name="Color3Sendoff" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 145.0
+offset_right = 293.0
+offset_bottom = 170.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_5xp6s")
+text = "Package & Send"
+
+[node name="Score" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = -165.0
+offset_right = 315.0
+offset_bottom = -142.0
+theme = ExtResource("3_5xp6s")
+text = "0"
+horizontal_alignment = 2
+
+[connection signal="timeout" from="Timer/NewGiftTimer" to="." method="_on_new_gift_timer_timeout"]
+[connection signal="timeout" from="Timer/Button1CD" to="." method="_on_button_1cd_timeout"]
+[connection signal="timeout" from="Timer/Button2CD" to="." method="_on_button_2cd_timeout"]
+[connection signal="timeout" from="Timer/Button3CD" to="." method="_on_button_3cd_timeout"]
+[connection signal="button_down" from="Control/Color1Sendoff" to="." method="_on_color_1_sendoff_button_down"]
+[connection signal="button_down" from="Control/Color2Sendoff" to="." method="_on_color_2_sendoff_button_down"]
+[connection signal="button_down" from="Control/Color3Sendoff" to="." method="_on_color_3_sendoff_button_down"]

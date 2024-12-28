@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var base_cd: float = 5.0
+
 const Options_Color: Array[int] = [0, 1, 2]
 const Options_Sizes: Array[Vector2i] = [Vector2i(2, 2), Vector2i(2, 1), Vector2i(1, 2)]
 const Options_Scale: Array[int] = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4]
@@ -10,6 +12,8 @@ const Options_Scale: Array[int] = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4]
 	load("res://assets/art/Presents/1x2Present.png")
 ]
 
+const Num_Starting_Gifts: int = 5
+
 class Gift:
 	var color: int
 	var size: Vector2i
@@ -17,6 +21,8 @@ class Gift:
 	var texture: Texture2D
 
 var pending_gifts: Array[Node2D] = []
+
+var total_score: int = 0
 
 func _draw_gift() -> Gift:
 	var gift = Gift.new()
@@ -46,7 +52,7 @@ func _spawn_gift(gift: Gift, pos: Vector2) -> Node2D:
 func _ready() -> void:
 	Globals.gameplay_node = self
 	
-	for i in range(15):
+	for i in range(Num_Starting_Gifts):
 		pending_gifts.append(_spawn_gift(_draw_gift(), Vector2(_int_to_x_pos(i), -100)))
 	_update_positions()
 
@@ -63,6 +69,89 @@ func remove_gift(index: int):
 	pending_gifts.remove_at(index)
 	_update_positions()
 
+func add_gift():
+	if pending_gifts.size() < 15:
+		pending_gifts.append(_spawn_gift(_draw_gift(), Vector2(_int_to_x_pos(pending_gifts.size()), -100)))
+		_update_positions()
+	else:
+		defeat()
+
+func defeat():
+	pass
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$Control/Score.text = str(total_score)
+
+	if $Timer/Button1CD.time_left > 0.0:
+		$Control/Color1Sendoff.text = "%.1fs" % ($Timer/Button1CD.time_left)
+		$Control/Color1Sendoff.disabled = true
+		$Packages/Package1.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	if $Timer/Button2CD.time_left > 0.0:
+		$Control/Color2Sendoff.text = "%.1fs" % ($Timer/Button2CD.time_left)
+		$Control/Color2Sendoff.disabled = true
+		$Packages/Package2.process_mode = Node.PROCESS_MODE_DISABLED
+		
+	if $Timer/Button3CD.time_left > 0.0:
+		$Control/Color3Sendoff.text = "%.1fs" % ($Timer/Button3CD.time_left)
+		$Control/Color3Sendoff.disabled = true
+		$Packages/Package3.process_mode = Node.PROCESS_MODE_DISABLED
+
+func _send_package_off(i: int):
+	for child in $Gifts.get_children():
+		if child.color == i and child.is_dropped:
+			child.queue_free()
+	
+	var score: int = 0
+	if i == 0:
+		score += $Packages/Package1/PackingGrid.reset_grid()
+		
+		var cd = (1.0 - (score as float/ 64.0)) * base_cd
+		$Timer/Button1CD.start(cd)
+	elif i == 1:
+		score += $Packages/Package2/PackingGrid.reset_grid()
+		
+		var cd = (1.0 - (score as float/ 64.0)) * base_cd
+		$Timer/Button2CD.start(cd)
+	elif i == 2:
+		score += $Packages/Package3/PackingGrid.reset_grid()
+		
+		var cd = (1.0 - (score as float/ 64.0)) * base_cd
+		$Timer/Button3CD.start(cd)
+	
+	total_score += score
+
+func _on_color_1_sendoff_button_down() -> void:
+	_send_package_off(0)
+
+func _on_color_2_sendoff_button_down() -> void:
+	_send_package_off(1)
+
+func _on_color_3_sendoff_button_down() -> void:
+	_send_package_off(2)
+
+
+func _on_new_gift_timer_timeout() -> void:
+	add_gift()
+
+
+const Button_Text = "Package & Send"
+
+func _on_button_1cd_timeout() -> void:
+	$Control/Color1Sendoff.text = Button_Text
+	$Control/Color1Sendoff.disabled = false
+	$Packages/Package1.process_mode = Node.PROCESS_MODE_INHERIT
+
+
+func _on_button_2cd_timeout() -> void:
+	$Control/Color2Sendoff.text = Button_Text
+	$Control/Color2Sendoff.disabled = false
+	$Packages/Package2.process_mode = Node.PROCESS_MODE_INHERIT
+
+
+func _on_button_3cd_timeout() -> void:
+	$Control/Color3Sendoff.text = Button_Text
+	$Control/Color3Sendoff.disabled = false
+	$Packages/Package3.process_mode = Node.PROCESS_MODE_INHERIT
