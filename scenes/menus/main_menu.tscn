@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://buf6tskwqqxwu"]
+
+[ext_resource type="PackedScene" uid="uid://b6mewhejl0yka" path="res://scenes/menus/menu_button.tscn" id="1_0l21c"]
+[ext_resource type="Script" path="res://scripts/buttons/quit_button.gd" id="2_qpmxi"]
+[ext_resource type="Theme" uid="uid://8khgiwggp4ed" path="res://assets/basic_theme.tres" id="2_wxxnm"]
+
+[node name="MainMenu" type="Node"]
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.388235, 0.294118, 0.490196, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -54.0
+offset_right = 47.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(47, 54)
+theme = ExtResource("2_wxxnm")
+alignment = 1
+
+[node name="StartButton" parent="VBoxContainer" instance=ExtResource("1_0l21c")]
+layout_mode = 2
+text = "Start Game"
+
+[node name="SettingsButton" parent="VBoxContainer" instance=ExtResource("1_0l21c")]
+layout_mode = 2
+text = "Settings"
+scene_to_transition = 2
+
+[node name="CreditsButton" parent="VBoxContainer" instance=ExtResource("1_0l21c")]
+layout_mode = 2
+text = "Credits"
+scene_to_transition = 3
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_wxxnm")
+text = "Quit"
+script = ExtResource("2_qpmxi")
