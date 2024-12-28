@@ -44,6 +44,9 @@ func _init_gift() -> void:
 func _process(delta: float) -> void:
 	if draggable and not is_dropped:
 		_drag()
+	
+	if tentative_gift and Globals.current_gift == null:
+		_on_area_2d_mouse_entered()
 
 func _drag():
 	if Input.is_action_just_pressed("click"):
@@ -92,7 +95,10 @@ func _on_place_gift():
 func _on_reject_gift():
 	reject_gift.emit()
 
+var tentative_gift: bool = false
+
 func _on_area_2d_mouse_entered() -> void:
+	tentative_gift = true
 	if not Globals.is_dragging and Globals.current_gift == null:
 		draggable = true
 		scale = Vector2(scale_size + 0.05, scale_size + 0.05)
@@ -100,6 +106,7 @@ func _on_area_2d_mouse_entered() -> void:
 
 
 func _on_area_2d_mouse_exited() -> void:
+	tentative_gift = false
 	if not Globals.is_dragging and Globals.current_gift == self:
 		draggable = false
 		if is_dropped:
