@@ -33,11 +33,9 @@ func _init_gift() -> void:
 	add_child(sprite)
 	
 	scale = Vector2(1, 1)
-	for c in $Area2D.get_children():
-		if c is CollisionShape2D:
-			var shape = RectangleShape2D.new()
-			shape.size = (gift_size * Globals.TILE_SIZE) as Vector2
-			c.shape = shape
+	var shape = RectangleShape2D.new()
+	shape.size = (gift_size * Globals.TILE_SIZE) as Vector2
+	$Area2D/CollisionShape2D.shape = shape
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

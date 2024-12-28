@@ -32,11 +32,14 @@ func _ready() -> void:
 			add_child(sprite)
 			textures.append(sprite)
 
-func reset_grid():
+func reset_grid() -> int:
 	grid_states.clear()
 	for i in range(grid_size.x * grid_size.y):
 		grid_states.append(false)
+	
+	var temp = placed_tiles
 	placed_tiles = 0
+	return temp
 
 func is_rect_placeable(rect: Rect2i) -> bool:
 	for x in range(rect.position.x, rect.end.x):
