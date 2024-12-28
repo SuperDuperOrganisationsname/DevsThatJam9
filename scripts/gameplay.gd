@@ -73,6 +73,12 @@ func add_gift():
 	if pending_gifts.size() < 15:
 		pending_gifts.append(_spawn_gift(_draw_gift(), Vector2(_int_to_x_pos(pending_gifts.size()), -100)))
 		_update_positions()
+	else:
+		defeat()
+
+func defeat():
+	pass
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
