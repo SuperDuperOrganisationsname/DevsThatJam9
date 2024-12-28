@@ -34,7 +34,8 @@ theme_override_constants/margin_bottom = 35
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
 layout_mode = 2
-split_offset = 523
+theme = ExtResource("2_nswpx")
+split_offset = 7250
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2
