@@ -20,6 +20,8 @@ var is_dropped: bool = false
 
 var gift_index: int = 0
 
+@onready var pub_area_node: Area2D = $Area2D
+
 signal place_gift
 signal reject_gift
 

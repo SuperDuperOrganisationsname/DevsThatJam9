@@ -64,10 +64,17 @@ func _int_to_x_pos(i: int) -> int:
 
 func _update_positions():
 	for j in range(pending_gifts.size()):
-		if not pending_gifts[j].draggable and pending_gifts[j].position.x == _int_to_x_pos(pending_gifts[j].gift_index):
+		if j >= pending_gifts.size():
+			continue
+		var gift = pending_gifts[j]
+		if not gift.draggable and gift.position.x == _int_to_x_pos(gift.gift_index):
 			var tween = get_tree().create_tween()
-			tween.tween_property(pending_gifts[j], "position", Vector2(_int_to_x_pos(j), -100), 0.1 * (pending_gifts[j].gift_index - j)).set_ease(Tween.EASE_OUT)
-			pending_gifts[j].gift_index = j
+			gift.pub_area_node.process_mode = Node.PROCESS_MODE_DISABLED
+			tween.tween_property(gift, "position", Vector2(_int_to_x_pos(j), -100), 0.1 * (gift.gift_index - j)).set_ease(Tween.EASE_OUT)
+			gift.gift_index = j
+			
+			await tween.finished
+			gift.pub_area_node.process_mode = Node.PROCESS_MODE_INHERIT
 
 func remove_gift(index: int):
 	pending_gifts.remove_at(index)
