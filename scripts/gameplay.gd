@@ -63,9 +63,10 @@ func _int_to_x_pos(i: int) -> int:
 
 func _update_positions():
 	for j in range(pending_gifts.size()):
-		var tween = get_tree().create_tween()
-		tween.tween_property(pending_gifts[j], "position", Vector2(_int_to_x_pos(j), -100), 0.2).set_ease(Tween.EASE_OUT)
-		pending_gifts[j].gift_index = j
+		if not pending_gifts[j].draggable:
+			var tween = get_tree().create_tween()
+			tween.tween_property(pending_gifts[j], "position", Vector2(_int_to_x_pos(j), -100), 0.2).set_ease(Tween.EASE_OUT)
+			pending_gifts[j].gift_index = j
 
 func remove_gift(index: int):
 	pending_gifts.remove_at(index)
@@ -73,7 +74,7 @@ func remove_gift(index: int):
 
 func add_gift():
 	if pending_gifts.size() < 15:
-		pending_gifts.append(_spawn_gift(_draw_gift(), Vector2(_int_to_x_pos(pending_gifts.size()), -100)))
+		pending_gifts.append(_spawn_gift(_draw_gift(), Vector2(_int_to_x_pos(14), -100)))
 		_update_positions()
 	else:
 		defeat()
@@ -84,6 +85,10 @@ func defeat():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	for i in range(pending_gifts.size()):
+		if not pending_gifts[i].draggable:
+			pending_gifts[i].position.y = -100
+	
 	$Control/Score.text = str(total_score)
 
 	if $Timer/Button1CD.time_left > 0.0:
