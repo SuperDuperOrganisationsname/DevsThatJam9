@@ -35,7 +35,7 @@ func _draw_gift() -> Gift:
 	
 	return gift
 
-func _spawn_gift(gift: Gift, pos: Vector2) -> Node2D:
+func _spawn_gift(gift: Gift) -> Node2D:
 	var obj = load("res://scenes/gift.tscn").instantiate()
 	obj.connect("place_gift", Globals.sfx_player.play_gift_interaction_sound)
 	obj.connect("reject_gift", Globals.sfx_player.play_gift_rejection_sound)
@@ -43,8 +43,9 @@ func _spawn_gift(gift: Gift, pos: Vector2) -> Node2D:
 	obj.scale_size = gift.scale
 	obj.gift_size = gift.size
 	obj.color = gift.color
+	obj.gift_index = 14
 	
-	obj.position = pos
+	obj.position = Vector2(_int_to_x_pos(14), -100)
 	$Gifts.add_child(obj)
 	obj._init_gift()
 	
@@ -55,7 +56,7 @@ func _ready() -> void:
 	Globals.gameplay_node = self
 	
 	for i in range(Num_Starting_Gifts):
-		pending_gifts.append(_spawn_gift(_draw_gift(), Vector2(_int_to_x_pos(i), -100)))
+		pending_gifts.append(_spawn_gift(_draw_gift()))
 	_update_positions()
 
 func _int_to_x_pos(i: int) -> int:
@@ -63,9 +64,9 @@ func _int_to_x_pos(i: int) -> int:
 
 func _update_positions():
 	for j in range(pending_gifts.size()):
-		if not pending_gifts[j].draggable:
+		if not pending_gifts[j].draggable and pending_gifts[j].position.x == _int_to_x_pos(pending_gifts[j].gift_index):
 			var tween = get_tree().create_tween()
-			tween.tween_property(pending_gifts[j], "position", Vector2(_int_to_x_pos(j), -100), 0.2).set_ease(Tween.EASE_OUT)
+			tween.tween_property(pending_gifts[j], "position", Vector2(_int_to_x_pos(j), -100), 0.1 * (pending_gifts[j].gift_index - j)).set_ease(Tween.EASE_OUT)
 			pending_gifts[j].gift_index = j
 
 func remove_gift(index: int):
@@ -74,7 +75,7 @@ func remove_gift(index: int):
 
 func add_gift():
 	if pending_gifts.size() < 15:
-		pending_gifts.append(_spawn_gift(_draw_gift(), Vector2(_int_to_x_pos(14), -100)))
+		pending_gifts.append(_spawn_gift(_draw_gift()))
 		_update_positions()
 	else:
 		defeat()
@@ -82,9 +83,15 @@ func add_gift():
 func defeat():
 	pass
 
+var update_frame_timer: int = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	update_frame_timer -= 1
+	if update_frame_timer <= 0:
+		_update_positions()
+		update_frame_timer = 10
+	
 	for i in range(pending_gifts.size()):
 		if not pending_gifts[i].draggable:
 			pending_gifts[i].position.y = -100
