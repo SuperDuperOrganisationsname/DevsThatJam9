@@ -14,7 +14,7 @@ const Options_Scale: Array[int] = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4]
 
 const Num_Starting_Gifts: int = 5
 
-const Gift_Y_Pos: int = -110
+const Gift_Y_Pos: int = -120
 
 class Gift:
 	var color: int
@@ -27,6 +27,8 @@ var pending_gifts: Array[Node2D] = []
 var total_score: int = 0
 
 var just_deleted: bool = false
+
+var scale_labels: Array[Label] = []
 
 func _draw_gift() -> Gift:
 	var gift = Gift.new()
@@ -66,6 +68,16 @@ func _ready() -> void:
 	
 	get_tree().paused = false
 	$DefeatScreen.visible = false
+	
+	for i in range(15):
+		var label = Label.new()
+		label.text = "0"
+		label.theme = load("res://assets/basic_theme.tres")
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.position = Vector2(_int_to_x_pos(i), Gift_Y_Pos + 20)
+		
+		$Control/ScaleLabels.add_child(label)
+		scale_labels.append(label)
 
 func _int_to_x_pos(i: int) -> int:
 	return -246 + 36 * (14 - i)
@@ -120,6 +132,12 @@ var update_frame_timer: int = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	for i in range(15):
+		if pending_gifts.size() > i and pending_gifts[i].position.x == _int_to_x_pos(i):
+			scale_labels[i].text = str(pending_gifts[i].scale_size)
+		else:
+			scale_labels[i].text = ""
+	
 	if just_deleted:
 		just_deleted = false
 		return

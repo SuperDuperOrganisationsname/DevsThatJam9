@@ -296,6 +296,22 @@ offset_bottom = -151.0
 theme = ExtResource("3_5xp6s")
 text = "Pause"
 
+[node name="ScaleLabels" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScaleLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -304.0
+offset_top = -94.0
+offset_right = -259.0
+offset_bottom = -71.0
+theme = ExtResource("3_5xp6s")
+text = "Sizes:
+"
+horizontal_alignment = 2
+
 [node name="PauseMenu" parent="." instance=ExtResource("6_nhbk8")]
 visible = false
 
