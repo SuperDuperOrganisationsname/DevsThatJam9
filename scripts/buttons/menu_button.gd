@@ -3,7 +3,6 @@ extends Button
 enum PossibleScenes {
 	main_game,
 	main_menu,
-	settings,
 	credits,
 	howtoplay
 }
@@ -18,10 +17,8 @@ func _ready() -> void:
 		1:
 			scene_path = Globals.MAIN_MENU_SCENE
 		2:
-			scene_path = Globals.SETTINGS_SCENE
-		3:
 			scene_path = Globals.CREDITS_SCENE
-		4:
+		3:
 			scene_path = Globals.HOWTOPLAY_SCENE
 		_:
 			scene_path = Globals.MAIN_GAME_SCENE

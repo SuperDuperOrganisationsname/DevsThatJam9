@@ -38,17 +38,12 @@ text = "Start Game"
 [node name="HowToPlayButton" parent="VBoxContainer" instance=ExtResource("1_0l21c")]
 layout_mode = 2
 text = "HowToPlay"
-scene_to_transition = 4
-
-[node name="SettingsButton" parent="VBoxContainer" instance=ExtResource("1_0l21c")]
-layout_mode = 2
-text = "Settings"
-scene_to_transition = 2
+scene_to_transition = 3
 
 [node name="CreditsButton" parent="VBoxContainer" instance=ExtResource("1_0l21c")]
 layout_mode = 2
 text = "Credits"
-scene_to_transition = 3
+scene_to_transition = 2
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
