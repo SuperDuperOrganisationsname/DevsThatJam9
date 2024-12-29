@@ -5,6 +5,7 @@ enum PossibleScenes {
 	main_menu,
 	settings,
 	credits,
+	howtoplay
 }
 
 @export var scene_to_transition: PossibleScenes
@@ -20,6 +21,8 @@ func _ready() -> void:
 			scene_path = Globals.SETTINGS_SCENE
 		3:
 			scene_path = Globals.CREDITS_SCENE
+		4:
+			scene_path = Globals.HOWTOPLAY_SCENE
 		_:
 			scene_path = Globals.MAIN_GAME_SCENE
 
