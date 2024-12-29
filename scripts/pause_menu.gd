@@ -3,6 +3,8 @@ extends Control
 var pause_menu_active = false
 
 func toggle_pause_menu() -> void:
+	$AudioStreamPlayer.play()
+	await $AudioStreamPlayer.finished
 	print("toggle")
 	pause_menu_active = !pause_menu_active
 	get_tree().paused = pause_menu_active

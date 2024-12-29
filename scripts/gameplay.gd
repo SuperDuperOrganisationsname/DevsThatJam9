@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var base_cd: float = 5.0
+@export var var_cd: float = 2.0
 
 const Options_Color: Array[int] = [0, 1, 2]
 const Options_Sizes: Array[Vector2i] = [Vector2i(2, 2), Vector2i(2, 1), Vector2i(1, 2)]
@@ -134,21 +134,21 @@ func _send_package_off(i: int):
 		$ShippingBox1.play("ClosePackage")
 		score += $Packages/Package1/PackingGrid.reset_grid()
 		
-		var cd = (1.0 - (score as float / 64.0)) * base_cd
+		var cd = (1.0 - (score as float / 64.0)) * var_cd + 3.0
 		$Timer/Button1CD.start(cd)
 		$Timer/DeleteGiftsTimer1.start(1.5)
 	elif i == 1:
 		$ShippingBox2.play("ClosePackage")
 		score += $Packages/Package2/PackingGrid.reset_grid()
 		
-		var cd = (1.0 - (score as float / 64.0)) * base_cd
+		var cd = (1.0 - (score as float / 64.0)) * var_cd + 3.0
 		$Timer/Button2CD.start(cd)
 		$Timer/DeleteGiftsTimer2.start(1.5)
 	elif i == 2:
 		$ShippingBox3.play("ClosePackage")
 		score += $Packages/Package3/PackingGrid.reset_grid()
 		
-		var cd = (1.0 - (score as float / 64.0)) * base_cd
+		var cd = (1.0 - (score as float / 64.0)) * var_cd + 3.0
 		$Timer/Button3CD.start(cd)
 		$Timer/DeleteGiftsTimer3.start(1.5)
 	
@@ -198,10 +198,12 @@ func _on_delete_gifts_timer_1_timeout() -> void:
 			child.queue_free()
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property($ShippingBox1, "position", Vector2(-192, 500), 0.5).set_ease(Tween.EASE_OUT)
-	tween.chain().tween_property($ShippingBox1, "position", Vector2(-192, 84), 0.5).set_ease(Tween.EASE_OUT)
+	tween.tween_property($ShippingBox1, "position", Vector2(-192, 500), 0.7).set_ease(Tween.EASE_OUT)
+	$PaperAudio.play()
+	tween.chain().tween_property($ShippingBox1, "position", Vector2(-192, 84), 0.7).set_ease(Tween.EASE_OUT)
 	
 	await tween.finished
+	$PaperAudio.play()
 	$Packages/Package1.visible = true
 	$ShippingBox1.play("ClosePackage", -1.0)
 
@@ -212,10 +214,12 @@ func _on_delete_gifts_timer_2_timeout() -> void:
 			child.queue_free()
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property($ShippingBox2, "position", Vector2(0, 500), 0.5).set_ease(Tween.EASE_OUT)
-	tween.chain().tween_property($ShippingBox2, "position", Vector2(0, 84), 0.5).set_ease(Tween.EASE_OUT)
+	tween.tween_property($ShippingBox2, "position", Vector2(0, 500), 0.7).set_ease(Tween.EASE_OUT)
+	$PaperAudio.play()
+	tween.chain().tween_property($ShippingBox2, "position", Vector2(0, 84), 0.7).set_ease(Tween.EASE_OUT)
 	
 	await tween.finished
+	$PaperAudio.play()
 	$Packages/Package2.visible = true
 	$ShippingBox2.play("ClosePackage", -1.0)
 
@@ -227,9 +231,11 @@ func _on_delete_gifts_timer_3_timeout() -> void:
 			child.queue_free()
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property($ShippingBox3, "position", Vector2(192, 500), 0.5).set_ease(Tween.EASE_OUT)
-	tween.chain().tween_property($ShippingBox3, "position", Vector2(192, 84), 0.5).set_ease(Tween.EASE_OUT)
+	tween.tween_property($ShippingBox3, "position", Vector2(192, 500), 0.7).set_ease(Tween.EASE_OUT)
+	$PaperAudio.play()
+	tween.chain().tween_property($ShippingBox3, "position", Vector2(192, 84), 0.7).set_ease(Tween.EASE_OUT)
 	
 	await tween.finished
+	$PaperAudio.play()
 	$Packages/Package3.visible = true
 	$ShippingBox3.play("ClosePackage", -1.0)

@@ -28,4 +28,6 @@ func _ready() -> void:
 
 func _pressed() -> void:
 	get_tree().paused = false
+	$AudioStreamPlayer.play()
+	await $AudioStreamPlayer.finished
 	get_tree().change_scene_to_file(scene_path)

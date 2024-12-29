@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmifk04jd7edn"]
+[gd_scene load_steps=5 format=3 uid="uid://cmifk04jd7edn"]
 
 [ext_resource type="Theme" uid="uid://8khgiwggp4ed" path="res://assets/basic_theme.tres" id="1_1rw1e"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_ef8ma"]
 [ext_resource type="PackedScene" uid="uid://b6mewhejl0yka" path="res://scenes/menus/menu_button.tscn" id="1_kcsrs"]
+[ext_resource type="AudioStream" uid="uid://dwattfsgwgwrn" path="res://assets/sfx/ButtonPress.wav" id="4_cdn0g"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -60,5 +61,8 @@ text = "Continue"
 layout_mode = 2
 text = "Quit"
 scene_to_transition = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cdn0g")
 
 [connection signal="button_down" from="BackgroundShadow/VBoxContainer/ContinueButton" to="." method="_on_continue_button_button_down"]

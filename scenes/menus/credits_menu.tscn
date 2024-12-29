@@ -50,7 +50,9 @@ Music used:
 Morning Routine by [url=https://soundcloud.com/ghostrifter-official]Ghostrifter Official[/url]
 Music promoted by [url]https://www.chosic.com/free-music/all/[/url]
 [url=https://creativecommons.org/licenses/by-sa/3.0/]Creative Commons CC BY-SA 3.0[/url]
-Parts of the beginning and end were cut to loop the song better"
+Parts of the beginning and end were cut to loop the song better
+
+Sound-Effects from [url=https://pixabay.com/sound-effects/paper-slide-89980/]pixabay[/url] and [url=https://pro.sfxr.me/]jsfxr[/url]"
 script = ExtResource("2_amum0")
 
 [node name="MenuButton" parent="MarginContainer/VSplitContainer" instance=ExtResource("1_wk540")]
