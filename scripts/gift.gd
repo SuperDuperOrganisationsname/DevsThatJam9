@@ -105,7 +105,8 @@ func _on_area_2d_mouse_entered() -> void:
 	tentative_gift = true
 	if not Globals.is_dragging and Globals.current_gift == null:
 		draggable = true
-		scale = Vector2(scale_size + 0.05, scale_size + 0.05)
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "scale", Vector2(scale_size + 0.05, scale_size + 0.05), 0.1).set_ease(Tween.EASE_OUT)
 		Globals.current_gift = self
 
 
@@ -113,10 +114,11 @@ func _on_area_2d_mouse_exited() -> void:
 	tentative_gift = false
 	if not Globals.is_dragging and Globals.current_gift == self:
 		draggable = false
+		var tween = get_tree().create_tween()
 		if is_dropped:
-			scale = Vector2(scale_size, scale_size)
+			tween.tween_property(self, "scale", Vector2(scale_size, scale_size), 0.1).set_ease(Tween.EASE_OUT)
 		else:
-			scale = Vector2(1, 1)
+			tween.tween_property(self, "scale", Vector2(1, 1), 0.1).set_ease(Tween.EASE_OUT)
 		Globals.current_gift = null
 
 

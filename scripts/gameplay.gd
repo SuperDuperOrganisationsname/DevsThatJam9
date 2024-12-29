@@ -43,9 +43,9 @@ func _spawn_gift(gift: Gift) -> Node2D:
 	obj.scale_size = gift.scale
 	obj.gift_size = gift.size
 	obj.color = gift.color
-	obj.gift_index = 14
+	obj.gift_index = 15
 	
-	obj.position = Vector2(_int_to_x_pos(14), -100)
+	obj.position = Vector2(_int_to_x_pos(15), -100)
 	$Gifts.add_child(obj)
 	obj._init_gift()
 	
@@ -99,9 +99,9 @@ func _process(delta: float) -> void:
 		_update_positions()
 		update_frame_timer = 10
 	
-	for i in range(pending_gifts.size()):
-		if not pending_gifts[i].draggable:
-			pending_gifts[i].position.y = -100
+	for gift in pending_gifts:
+		if gift and not gift.draggable:
+			gift.position.y = -100
 	
 	$Control/Score.text = str(total_score)
 
