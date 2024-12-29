@@ -21,26 +21,31 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.160784, 0.156863, 0.156863, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 35
 theme_override_constants/margin_top = 35
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 35
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="ScrollContainer/MarginContainer"]
 layout_mode = 2
 split_offset = 7250
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VSplitContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_oc2r8")
 theme_override_font_sizes/normal_font_size = 30
@@ -51,25 +56,28 @@ You're an overworked elf working for Santa at the Northpole-Factory.
 Your job is sorting presents into packages and sending them off."
 fit_content = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/MarginContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_pdl6n")
 expand_mode = 5
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_oc2r8")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "There are 3 types of presents. Sort them into their respective boxes using Drag-and-Drop. 
-But be careful. There is limited space in a single box and it takes some time for the next box to arrive.
+text = "There are 3 types of presents. Sort them into their respective boxes using Drag-and-Drop.
 
-If you can't keep up with the assembly line, you lose!
+But be careful. There is limited space in a single box, and it takes some time for the next box to arrive after you've sent one away.
 
-"
+Every time you send out a box, you get points depending on how full it was. The more spaces in the box you have filled, the more points you get and the shorter your cooldown is for sending the next box.
+
+But look out! The higher your score is, the shorter the time until the next present arrives.
+
+If you can't keep up with the assembly line, you lose!"
 fit_content = true
 
-[node name="MenuButton" parent="MarginContainer/VSplitContainer" instance=ExtResource("3_c5d3j")]
+[node name="MenuButton" parent="ScrollContainer/MarginContainer/VSplitContainer" instance=ExtResource("3_c5d3j")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
