@@ -84,6 +84,7 @@ func _drag():
 			scale = Vector2(1, 1)
 			_on_reject_gift()
 			draggable = false
+			z_index = 0
 		Globals.current_gift = null
 		Globals.current_grid = null
 
@@ -108,6 +109,7 @@ func _on_area_2d_mouse_entered() -> void:
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "scale", Vector2(scale_size + 0.05, scale_size + 0.05), 0.1).set_ease(Tween.EASE_OUT)
 		Globals.current_gift = self
+		z_index = 1
 
 
 func _on_area_2d_mouse_exited() -> void:
@@ -120,6 +122,7 @@ func _on_area_2d_mouse_exited() -> void:
 		else:
 			tween.tween_property(self, "scale", Vector2(1, 1), 0.1).set_ease(Tween.EASE_OUT)
 		Globals.current_gift = null
+		z_index = 0
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

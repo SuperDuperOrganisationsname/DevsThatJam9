@@ -56,7 +56,8 @@ func _ready() -> void:
 	Globals.gameplay_node = self
 	
 	for i in range(Num_Starting_Gifts):
-		pending_gifts.append(_spawn_gift(_draw_gift()))
+		var gift = _spawn_gift(_draw_gift())
+		pending_gifts.append(gift)
 	_update_positions()
 
 func _int_to_x_pos(i: int) -> int:
@@ -82,7 +83,8 @@ func remove_gift(index: int):
 
 func add_gift():
 	if pending_gifts.size() < 15:
-		pending_gifts.append(_spawn_gift(_draw_gift()))
+		var gift = _spawn_gift(_draw_gift())
+		pending_gifts.append(gift)
 		_update_positions()
 	else:
 		defeat()
