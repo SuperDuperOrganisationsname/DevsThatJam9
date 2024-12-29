@@ -84,7 +84,7 @@ func _update_positions():
 		if just_deleted:
 			just_deleted = false
 			return
-		if not gift.draggable and gift.position.x >= _int_to_x_pos(gift.gift_index):
+		if not gift.draggable and not gift.is_moving:
 			if just_deleted:
 				just_deleted = false
 				return
@@ -92,6 +92,8 @@ func _update_positions():
 			gift.pub_area_node.process_mode = Node.PROCESS_MODE_DISABLED
 			tween.tween_property(gift, "position", Vector2(_int_to_x_pos(j), Gift_Y_Pos), 0.1 * (gift.gift_index - j)).set_ease(Tween.EASE_OUT)
 			gift.gift_index = j
+			gift.is_moving = true
+			tween.chain().tween_property(gift, "is_moving", false, 0.001).set_ease(Tween.EASE_OUT)
 			
 			await tween.finished
 			gift.pub_area_node.process_mode = Node.PROCESS_MODE_INHERIT

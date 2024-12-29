@@ -22,6 +22,8 @@ var final_pos: Vector2 = Vector2(0, 0)
 
 var gift_index: int = 0
 
+var is_moving: bool = false
+
 @onready var pub_area_node: Area2D = $Area2D
 
 signal place_gift
@@ -95,6 +97,7 @@ func _drag():
 			scale = Vector2(1, 1)
 			_on_reject_gift()
 			draggable = false
+			is_moving = false
 			z_index = 0
 		Globals.current_gift = null
 		Globals.current_grid = null
@@ -117,6 +120,7 @@ func _on_area_2d_mouse_entered() -> void:
 	tentative_gift = true
 	if not Globals.is_dragging and Globals.current_gift == null:
 		draggable = true
+		is_moving = true
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "scale", Vector2(scale_size + 0.05, scale_size + 0.05), 0.1).set_ease(Tween.EASE_OUT)
 		Globals.current_gift = self
@@ -127,6 +131,7 @@ func _on_area_2d_mouse_exited() -> void:
 	tentative_gift = false
 	if not Globals.is_dragging and Globals.current_gift == self:
 		draggable = false
+		is_moving = false
 		var tween = get_tree().create_tween()
 		if is_dropped:
 			tween.tween_property(self, "scale", Vector2(scale_size, scale_size), 0.1).set_ease(Tween.EASE_OUT)
