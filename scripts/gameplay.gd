@@ -14,6 +14,8 @@ const Options_Scale: Array[int] = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4]
 
 const Num_Starting_Gifts: int = 5
 
+const Gift_Y_Pos: int = -110
+
 class Gift:
 	var color: int
 	var size: Vector2i
@@ -43,9 +45,9 @@ func _spawn_gift(gift: Gift) -> Node2D:
 	obj.scale_size = gift.scale
 	obj.gift_size = gift.size
 	obj.color = gift.color
-	obj.gift_index = 15
+	obj.gift_index = 20
 	
-	obj.position = Vector2(_int_to_x_pos(15), -100)
+	obj.position = Vector2(_int_to_x_pos(20), Gift_Y_Pos)
 	$Gifts.add_child(obj)
 	obj._init_gift()
 	
@@ -74,7 +76,7 @@ func _update_positions():
 		if not gift.draggable and gift.position.x == _int_to_x_pos(gift.gift_index):
 			var tween = get_tree().create_tween()
 			gift.pub_area_node.process_mode = Node.PROCESS_MODE_DISABLED
-			tween.tween_property(gift, "position", Vector2(_int_to_x_pos(j), -100), 0.1 * (gift.gift_index - j)).set_ease(Tween.EASE_OUT)
+			tween.tween_property(gift, "position", Vector2(_int_to_x_pos(j), Gift_Y_Pos), 0.1 * (gift.gift_index - j)).set_ease(Tween.EASE_OUT)
 			gift.gift_index = j
 			
 			await tween.finished
@@ -108,7 +110,7 @@ func _process(delta: float) -> void:
 	
 	for gift in pending_gifts:
 		if gift and not gift.draggable:
-			gift.position.y = -100
+			gift.position.y = Gift_Y_Pos
 	
 	$Control/Score.text = "Score: " + str(total_score)
 	$Control/GiftTimer.text = "New Present in %.1fs" % ($Timer/NewGiftTimer.time_left)

@@ -30,6 +30,8 @@ func _ready() -> void:
 			sprite.texture = texture
 			sprite.centered = false
 			sprite.offset = Vector2(x, y) * (Globals.TILE_SIZE as Vector2)
+			sprite.hframes = 3
+			sprite.frame = color
 			add_child(sprite)
 			textures.append(sprite)
 
