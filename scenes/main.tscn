@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4ep52oxx3stn"]
+[gd_scene load_steps=8 format=3 uid="uid://d4ep52oxx3stn"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_2ur0b"]
 [ext_resource type="PackedScene" uid="uid://csyvvlqifwl87" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://8khgiwggp4ed" path="res://assets/basic_theme.tres" id="3_5xp6s"]
 [ext_resource type="PackedScene" uid="uid://cwphbbl83kjlq" path="res://scenes/shipping_box.tscn" id="5_cikjy"]
 [ext_resource type="PackedScene" uid="uid://cmifk04jd7edn" path="res://scenes/menus/pause_menu.tscn" id="6_nhbk8"]
+[ext_resource type="PackedScene" uid="uid://b6mewhejl0yka" path="res://scenes/menus/menu_button.tscn" id="7_a8slu"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ur0b")
@@ -122,10 +123,20 @@ text = "Package & Send"
 
 [node name="Score" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 275.0
+offset_left = 250.0
 offset_top = -165.0
-offset_right = 315.0
+offset_right = 290.0
 offset_bottom = -142.0
+theme = ExtResource("3_5xp6s")
+text = "0"
+horizontal_alignment = 2
+
+[node name="GiftTimer" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -261.0
+offset_top = -69.0
+offset_right = -221.0
+offset_bottom = -46.0
 theme = ExtResource("3_5xp6s")
 text = "0"
 horizontal_alignment = 2
@@ -141,6 +152,61 @@ text = "Pause"
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_nhbk8")]
 visible = false
+
+[node name="DefeatScreen" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_left = -100.0
+offset_top = -250.0
+offset_right = -60.0
+offset_bottom = -210.0
+
+[node name="BackgroundShadow" type="ColorRect" parent="DefeatScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 160.0
+offset_bottom = 460.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.160784, 0.156863, 0.156863, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DefeatScreen/BackgroundShadow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="DefeatLabel" type="Label" parent="DefeatScreen/BackgroundShadow/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_5xp6s")
+theme_type_variation = &"HeaderLarge"
+text = "Defeat
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="DefeatScreen/BackgroundShadow/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_5xp6s")
+theme_type_variation = &"HeaderLarge"
+text = "Score: 0
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" parent="DefeatScreen/BackgroundShadow/VBoxContainer" instance=ExtResource("7_a8slu")]
+layout_mode = 2
+text = "Quit"
+scene_to_transition = 1
 
 [connection signal="timeout" from="Timer/NewGiftTimer" to="." method="_on_new_gift_timer_timeout"]
 [connection signal="timeout" from="Timer/Button1CD" to="." method="_on_button_1cd_timeout"]

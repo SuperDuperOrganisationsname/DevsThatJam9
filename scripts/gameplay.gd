@@ -59,6 +59,9 @@ func _ready() -> void:
 		var gift = _spawn_gift(_draw_gift())
 		pending_gifts.append(gift)
 	_update_positions()
+	
+	get_tree().paused = false
+	$DefeatScreen.visible = false
 
 func _int_to_x_pos(i: int) -> int:
 	return -246 + 36 * (14 - i)
@@ -90,7 +93,9 @@ func add_gift():
 		defeat()
 
 func defeat():
-	pass
+	$DefeatScreen/BackgroundShadow/VBoxContainer/ScoreLabel.text = "Score: " + str(total_score) + "\n\n"
+	get_tree().paused = true
+	$DefeatScreen.visible = true
 
 var update_frame_timer: int = 10
 
@@ -105,7 +110,8 @@ func _process(delta: float) -> void:
 		if gift and not gift.draggable:
 			gift.position.y = -100
 	
-	$Control/Score.text = str(total_score)
+	$Control/Score.text = "Score: " + str(total_score)
+	$Control/GiftTimer.text = "New Present in %.1fs" % ($Timer/NewGiftTimer.time_left)
 
 	if $Timer/Button1CD.time_left > 0.0:
 		$Control/Color1Sendoff.text = "%.1fs" % ($Timer/Button1CD.time_left)

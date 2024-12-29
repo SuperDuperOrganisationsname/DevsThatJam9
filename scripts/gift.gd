@@ -45,6 +45,9 @@ func _init_gift() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if is_dropped:
+		z_index = -1
+	
 	if draggable and not is_dropped:
 		_drag()
 	
@@ -68,6 +71,7 @@ func _drag():
 		if Globals.current_grid:
 			Globals.current_grid.gift_inside = false
 		var tween = get_tree().create_tween()
+		z_index = 0
 		if can_be_dropped:
 			tween.tween_property(self, "position", Globals.current_grid.gift_global_position as Vector2, 0.2).set_ease(Tween.EASE_OUT)
 			Globals.current_grid.place_rect(Rect2i(Globals.current_grid.gift_position, size))
