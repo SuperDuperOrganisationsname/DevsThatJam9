@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4ep52oxx3stn"]
+[gd_scene load_steps=9 format=3 uid="uid://d4ep52oxx3stn"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_2ur0b"]
 [ext_resource type="PackedScene" uid="uid://csyvvlqifwl87" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
+[ext_resource type="AudioStream" uid="uid://dwattfsgwgwrn" path="res://assets/sfx/ButtonPress.wav" id="2_dm3f6"]
 [ext_resource type="PackedScene" uid="uid://dadtonw6mrlp8" path="res://scenes/present_sfx_player.tscn" id="2_vh1fj"]
 [ext_resource type="Theme" uid="uid://8khgiwggp4ed" path="res://assets/basic_theme.tres" id="3_5xp6s"]
 [ext_resource type="PackedScene" uid="uid://cwphbbl83kjlq" path="res://scenes/shipping_box.tscn" id="5_cikjy"]
@@ -10,6 +11,9 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ur0b")
+
+[node name="ButtonAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_dm3f6")
 
 [node name="GiftSFX" parent="." instance=ExtResource("2_vh1fj")]
 
