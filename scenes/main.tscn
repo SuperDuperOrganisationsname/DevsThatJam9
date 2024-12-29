@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://d4ep52oxx3stn"]
+[gd_scene load_steps=14 format=4 uid="uid://d4ep52oxx3stn"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_2ur0b"]
 [ext_resource type="PackedScene" uid="uid://csyvvlqifwl87" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://8khgiwggp4ed" path="res://assets/basic_theme.tres" id="3_5xp6s"]
 [ext_resource type="AudioStream" uid="uid://u2o2e5b8hjl4" path="res://assets/sfx/PaperSlide.mp3" id="3_b1mlo"]
 [ext_resource type="Texture2D" uid="uid://b3cccp681hhu2" path="res://assets/art/FactoryTileset.png" id="3_gk0tq"]
+[ext_resource type="AudioStream" uid="uid://2xe1ktcgmpwu" path="res://assets/sfx/PackingSound.wav" id="4_htlt7"]
 [ext_resource type="PackedScene" uid="uid://cwphbbl83kjlq" path="res://scenes/shipping_box.tscn" id="5_cikjy"]
 [ext_resource type="PackedScene" uid="uid://cmifk04jd7edn" path="res://scenes/menus/pause_menu.tscn" id="6_nhbk8"]
 [ext_resource type="PackedScene" uid="uid://b6mewhejl0yka" path="res://scenes/menus/menu_button.tscn" id="7_a8slu"]
@@ -127,6 +128,9 @@ stream = ExtResource("2_dm3f6")
 
 [node name="PaperAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_b1mlo")
+
+[node name="PackingAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_htlt7")
 
 [node name="GiftSFX" parent="." instance=ExtResource("2_vh1fj")]
 

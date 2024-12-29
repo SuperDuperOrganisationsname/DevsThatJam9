@@ -155,6 +155,7 @@ func _send_package_off(i: int):
 	var score: int = 0
 	if i == 0:
 		$ShippingBox1.play("ClosePackage")
+		$PackingAudio.play()
 		score += $Packages/Package1/PackingGrid.reset_grid()
 		
 		var cd = (1.0 - (score as float / 64.0)) * var_cd + 3.0
@@ -162,6 +163,7 @@ func _send_package_off(i: int):
 		$Timer/DeleteGiftsTimer1.start(1.5)
 	elif i == 1:
 		$ShippingBox2.play("ClosePackage")
+		$PackingAudio.play()
 		score += $Packages/Package2/PackingGrid.reset_grid()
 		
 		var cd = (1.0 - (score as float / 64.0)) * var_cd + 3.0
@@ -169,6 +171,7 @@ func _send_package_off(i: int):
 		$Timer/DeleteGiftsTimer2.start(1.5)
 	elif i == 2:
 		$ShippingBox3.play("ClosePackage")
+		$PackingAudio.play()
 		score += $Packages/Package3/PackingGrid.reset_grid()
 		
 		var cd = (1.0 - (score as float / 64.0)) * var_cd + 3.0
@@ -229,6 +232,7 @@ func _on_delete_gifts_timer_1_timeout() -> void:
 	$PaperAudio.play()
 	$Packages/Package1.visible = true
 	$ShippingBox1.play("ClosePackage", -1.0)
+	$PackingAudio.play()
 
 func _on_delete_gifts_timer_2_timeout() -> void:
 	$Packages/Package2.visible = false
@@ -245,6 +249,7 @@ func _on_delete_gifts_timer_2_timeout() -> void:
 	$PaperAudio.play()
 	$Packages/Package2.visible = true
 	$ShippingBox2.play("ClosePackage", -1.0)
+	$PackingAudio.play()
 
 
 func _on_delete_gifts_timer_3_timeout() -> void:
@@ -262,3 +267,4 @@ func _on_delete_gifts_timer_3_timeout() -> void:
 	$PaperAudio.play()
 	$Packages/Package3.visible = true
 	$ShippingBox3.play("ClosePackage", -1.0)
+	$PackingAudio.play()
