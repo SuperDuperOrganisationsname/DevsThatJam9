@@ -250,6 +250,7 @@ offset_top = -165.0
 offset_right = 290.0
 offset_bottom = -142.0
 theme = ExtResource("3_5xp6s")
+theme_override_colors/font_color = Color(0.160784, 0.156863, 0.156863, 1)
 text = "0"
 horizontal_alignment = 2
 
@@ -260,6 +261,7 @@ offset_top = -69.0
 offset_right = -221.0
 offset_bottom = -46.0
 theme = ExtResource("3_5xp6s")
+theme_override_colors/font_color = Color(0.160784, 0.156863, 0.156863, 1)
 text = "0"
 horizontal_alignment = 2
 
