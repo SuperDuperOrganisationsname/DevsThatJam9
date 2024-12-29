@@ -17,6 +17,8 @@ var draggable: bool = false
 
 var can_be_dropped: bool = false
 var is_dropped: bool = false
+var final_pos_timer: int = 10
+var final_pos: Vector2 = Vector2(0, 0)
 
 var gift_index: int = 0
 
@@ -47,6 +49,11 @@ func _init_gift() -> void:
 func _process(delta: float) -> void:
 	if is_dropped:
 		z_index = -1
+		if final_pos_timer > 0:
+			final_pos_timer -= 1
+		else:
+			position = final_pos
+		
 	
 	if draggable and not is_dropped:
 		_drag()
@@ -75,7 +82,7 @@ func _drag():
 		if can_be_dropped:
 			tween.tween_property(self, "position", Globals.current_grid.gift_global_position as Vector2, 0.2).set_ease(Tween.EASE_OUT)
 			Globals.current_grid.place_rect(Rect2i(Globals.current_grid.gift_position, size))
-			
+			final_pos = Globals.current_grid.gift_global_position as Vector2
 			_on_place_gift()
 			is_dropped = true
 			scale = Vector2(scale_size, scale_size)
