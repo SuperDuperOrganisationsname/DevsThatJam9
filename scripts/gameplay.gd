@@ -26,6 +26,8 @@ var pending_gifts: Array[Node2D] = []
 
 var total_score: int = 0
 
+var just_deleted: bool = false
+
 func _draw_gift() -> Gift:
 	var gift = Gift.new()
 	gift.color = Options_Color[randi() % Options_Color.size()]
@@ -69,11 +71,23 @@ func _int_to_x_pos(i: int) -> int:
 	return -246 + 36 * (14 - i)
 
 func _update_positions():
+	if just_deleted:
+		just_deleted = false
+		return
 	for j in range(pending_gifts.size()):
+		if just_deleted:
+			just_deleted = false
+			return
 		if j >= pending_gifts.size():
 			continue
 		var gift = pending_gifts[j]
-		if not gift.draggable and gift.position.x == _int_to_x_pos(gift.gift_index):
+		if just_deleted:
+			just_deleted = false
+			return
+		if not gift.draggable and gift.position.x >= _int_to_x_pos(gift.gift_index):
+			if just_deleted:
+				just_deleted = false
+				return
 			var tween = get_tree().create_tween()
 			gift.pub_area_node.process_mode = Node.PROCESS_MODE_DISABLED
 			tween.tween_property(gift, "position", Vector2(_int_to_x_pos(j), Gift_Y_Pos), 0.1 * (gift.gift_index - j)).set_ease(Tween.EASE_OUT)
@@ -84,6 +98,7 @@ func _update_positions():
 
 func remove_gift(index: int):
 	pending_gifts.remove_at(index)
+	just_deleted = true
 	_update_positions()
 
 func add_gift():
@@ -103,12 +118,18 @@ var update_frame_timer: int = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if just_deleted:
+		just_deleted = false
+		return
 	update_frame_timer -= 1
 	if update_frame_timer <= 0:
 		_update_positions()
 		update_frame_timer = 10
 	
 	for gift in pending_gifts:
+		if just_deleted:
+			just_deleted = false
+			return
 		if gift and not gift.draggable:
 			gift.position.y = Gift_Y_Pos
 	
