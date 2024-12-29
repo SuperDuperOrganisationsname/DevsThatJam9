@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://d4ep52oxx3stn"]
+[gd_scene load_steps=15 format=4 uid="uid://d4ep52oxx3stn"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_2ur0b"]
 [ext_resource type="PackedScene" uid="uid://csyvvlqifwl87" path="res://scenes/packing_grid.tscn" id="1_bkw12"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cwphbbl83kjlq" path="res://scenes/shipping_box.tscn" id="5_cikjy"]
 [ext_resource type="PackedScene" uid="uid://cmifk04jd7edn" path="res://scenes/menus/pause_menu.tscn" id="6_nhbk8"]
 [ext_resource type="PackedScene" uid="uid://b6mewhejl0yka" path="res://scenes/menus/menu_button.tscn" id="7_a8slu"]
+[ext_resource type="Texture2D" uid="uid://bogpx33qipame" path="res://assets/art/Presents/2x1Present.png" id="12_wy2kv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_62jov"]
 texture = ExtResource("3_gk0tq")
@@ -197,6 +198,23 @@ position = Vector2(144, 36)
 
 [node name="PackingGrid" parent="Packages/Package3" instance=ExtResource("1_bkw12")]
 color = 2
+
+[node name="RedPresentIndicator" type="Sprite2D" parent="."]
+position = Vector2(-194, -25)
+texture = ExtResource("12_wy2kv")
+hframes = 3
+
+[node name="WhitePresentIndicator" type="Sprite2D" parent="."]
+position = Vector2(0, -25)
+texture = ExtResource("12_wy2kv")
+hframes = 3
+frame = 1
+
+[node name="BluePresentIndicator" type="Sprite2D" parent="."]
+position = Vector2(195, -25)
+texture = ExtResource("12_wy2kv")
+hframes = 3
+frame = 2
 
 [node name="ShippingBox1" parent="." instance=ExtResource("5_cikjy")]
 position = Vector2(-192, 84)
